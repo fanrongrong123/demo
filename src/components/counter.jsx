@@ -1,14 +1,15 @@
-import React,{Compontent} from 'react'
+import React,{Component} from 'react'
 import PropTypes from 'prop-types'
 
 // ui组件:不使用任何redux相关语法
 
-export default class Counter extends Component{
+export default class Counter extends Component {
   static propTypes = {
-    count:propTypes.number.isRequired,   //用于显示一般属性
+
+    count:PropTypes.number.isRequired,   //用于显示一般属性
     increment:PropTypes.func.isRequired,  //用于更新数据一般属性
     decrement:PropTypes.func.isRequired,
-    incrementAsync:PropTypes.func.isRequired
+   
   }
 
 // 创建一个ref容器,保存到组件对象上
@@ -42,6 +43,10 @@ incrementAsync = ()=>{
 
 render(){
   // 渲染到真实页面
+
+  const count =this.props.count
+
+
 return (
   <div>
     <p>click {count} times</p>

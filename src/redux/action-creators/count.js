@@ -8,8 +8,7 @@ dispatch =>{
 
 
 import{DECREEMENT,INCREEMENT} from '../action-types'
-import { number } from 'C:/Users/范荣荣/AppData/Local/Microsoft/TypeScript/3.6/node_modules/@types/prop-types'
-import { dispatch } from 'C:/Users/范荣荣/AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/range'
+
 
 // 同步增加
 export const increment = (number) =>({type:INCREEMENT,data:number})
