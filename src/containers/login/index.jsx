@@ -1,34 +1,34 @@
 /*
-用户登陆的路由组件
+用户登陆的一级路由组件
  */
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import {Form,Input,Icon,Button} from "antd";
 import {connect} from 'react-redux'
-import qs from 'qs'
+// import qs from 'qs'
 
 
 
-import logo from './images/logo.png'
-import './login.less'
+import logo from '../../assets/images/logo.png'
+import './index.less'
 import {loginAsync} from '../../redux/action-creators/user'
-import WithCheckLogin from './with-check-login'
+import WithCheckLogin from '../with-check-login'
 
 
 const {Item} = Form
 
 
 @connect(
-  state => ({hasLogin:state.user.hasLogin}),
+  null,
   {loginAsync}
 )
 @Form.create()
 @WithCheckLogin
 
 class Login extends Component {
-  handleSubmit = e =>{
+  handleSubmit = (event) =>{
     // 阻止默认行为
-    e.preventDefault()
+    event.preventDefault()
     // 对表单字段进行统一验证
     this.props.form.validateFields((err,values)=>{
       if (!err) {

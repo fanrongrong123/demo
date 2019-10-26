@@ -9,6 +9,11 @@ import {message} from 'antd'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+import store from '../redux/store'
+import {removeUserToken} from '../redux/action-creators/user'
+import history from '../history'
+
+
 // 创建一个instance
 const instance = axios.create({
   timeout:10000   //时间超过10秒走失败

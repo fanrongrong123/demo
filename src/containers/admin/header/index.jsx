@@ -3,21 +3,59 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'  // 高阶组件
 import dayjs from 'dayjs'
 import format from 'date-fns/format'
+import {Modal,Button,Icon} from 'antd'
+import screenfull from 'screenfull'
 
 
-
+import {removeUserToken} from '../../../redux/action-creators/user'
 import LinkButton from '../../../components/link-button'
+import {reqWeather} from '../../../api'
+
 import './index.less'
 
+
+
 // 管理页面的头部组件
-@connect(state =>({username:state.user.user.username}))
+@connect(state =>({username:state.user.user.username,
+                    headerTitle:state.headerTitle}),
+                    {removeUserToken}
+)
+
 @withRouter class Header extends Component {
   state = {
-    currentTime:format(Date.now(),'YYYY-MM-DD HH:mm:ss')
+    currentTime:format(Date.now(),'YYYY-MM-DD HH:mm:ss'),
+    dayPictureUrl:'',  //天气图片
+    weather:'',        //天气文本
+    isFullScreen:false   //当前是否全屏
   }
 
   logout = ()=>{
-    alert('logout')
+    // 显示确认框
+    Modal.confirm({
+      title:'确定退出吗?',
+      onOk:() =>{
+        this.props.removeUserToken()
+      },
+      onCancel(){
+        console.log('Cancel');
+      },
+    })
+  }
+
+  showWeather = async() =>{
+    // 请求获取数据
+    const {dayPictureUrl,weather} = await reqWeather('北京')
+    // 更新状态
+    this.setState({
+      dayPictureUrl,
+      weather
+    })
+  }
+
+  handleFullScreen = ()=>{
+    if (screenfull.isEnabled) {
+      screenfull.toggle()
+    }
   }
 
   componentDidMount(){
@@ -27,21 +65,34 @@ import './index.less'
         currentTime:dayjs().format('YYYY-MM-DD HH:mm:ss')
       })
     }, 1000);
+
+
+    // 请求获取天气信息显示
+   this.showWeather()
+
+  //  给screenfull绑定change
+  screenfull.onchange(()=>{
+    // 切换数据
+    this.setState({
+      isFullScreen:!this.state.isFullScreen
+    })
+  })
   }
 
+  
   // 清除定时器
   componentWillMount(){
     clearInterval(this.intercalId)
   }
 
-  // 渲染到也页面
+  // 渲染到页面
   // 得到当前请求路径
   render(){
     const path = this.props.location.pathname
     const {currentTime} = this.state
 
 
-    
+    // 页面结构
   return (
     <div className="header">
       <div className="header-top">

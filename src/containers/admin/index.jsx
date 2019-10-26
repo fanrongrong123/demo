@@ -1,11 +1,26 @@
+// 后台管理一级路由的组件
 // 引入
+import React,{Component} from 'react'
+import {Layout} from 'antd'
+import {Route,Switch,Redirect} from 'react-router-dom'
+
+
+import LeftNav from './left-nav'
+import Header from './header'
+import WithCheckLogin from '../with-check-login'
+
+
 
 import User from '../user'
+import Home from '../../components/home'
+import Category from '../category'
+import Product from '../product'
+import Role from '../role'
 import Line from '../../components/charts/line'
 import Bar from '../../components/charts/bar'
 import Pie from '../../components/charts/pie'
 
-const { Header, Footer, Sider, Content } = Layout
+const { Footer, Sider, Content } = Layout
 
 @WithCheckLogin
 class Admin extends Component {
@@ -19,7 +34,7 @@ class Admin extends Component {
           <LeftNav/>
         </Sider>
         <Layout>
-          <AdminHeader/>
+          <Header/>
           <Content style={{backgroundColor: 'white', margin: '30px 15px 0 15px'}}>
             <Switch>
               <Route path="/home" component={Home}/>
@@ -33,7 +48,7 @@ class Admin extends Component {
               <Redirect to="/home"/>
             </Switch>
           </Content>
-          <Footer style={{textAlign: 'center'}}>推荐使用谷歌浏览器，可以获得更佳页面操作体验</Footer>
+          <Footer style={{textAlign: 'center'}}>推荐使用谷歌浏览器</Footer>
         </Layout>
       </Layout>
     )

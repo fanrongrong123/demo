@@ -4,11 +4,10 @@
 import { combineReducers } from 'redux'
 
 import user from './user'
+import headerTitle from './header-title'
 
-import xxx from './xxx'
-
-// 管理的总state的结构:
+// 暴露
 export default combineReducers({
   user,
-  xxx
+  headerTitle
 })

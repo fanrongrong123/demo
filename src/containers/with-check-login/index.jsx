@@ -1,5 +1,5 @@
 
-// 封装一个用于检查用户登陆的高阶组件
+// 封装一个用来检查用户登陆的高阶组件
 
 import React from 'react'
 import {connect} from 'react-redux'

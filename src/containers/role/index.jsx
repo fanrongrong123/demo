@@ -11,4 +11,5 @@ export default class Role extends Component {
         Role
       </div>
     )
+    }
   }
