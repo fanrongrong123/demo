@@ -12,10 +12,12 @@ import WithCheckLogin from '../with-check-login'
 
 
 import User from '../user'
+import Role from '../role'
 import Home from '../../components/home'
 import Category from '../category'
 import Product from '../product'
-import Role from '../role'
+import ProductDetail from '../product/detail'
+import ProductAddUpdate from '../product/add-update'
 import Line from '../../components/charts/line'
 import Bar from '../../components/charts/bar'
 import Pie from '../../components/charts/pie'
@@ -40,6 +42,8 @@ class Admin extends Component {
               <Route path="/home" component={Home}/>
               <Route path="/category" component={Category}/>
               <Route path="/product" component={Product}/>
+              <Route path="/product/detail/:id" component={ProductDetail} exact/>
+              <Route path="/product/addupdate" component={ProductAddUpdate} exact/>
               <Route path="/role" component={Role}/>
               <Route path="/user" component={User}/>
               <Route path="/charts/line" component={Line}/>

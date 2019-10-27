@@ -26,7 +26,7 @@ import './index.less'
     currentTime:format(Date.now(),'YYYY-MM-DD HH:mm:ss'),
     dayPictureUrl:'',  //天气图片
     weather:'',        //天气文本
-    isFullScreen:false   //当前是否全屏
+    isFullScreen:false ,  //当前是否全屏
   }
 
   logout = ()=>{
@@ -81,15 +81,15 @@ import './index.less'
 
   
   // 清除定时器
-  componentWillMount(){
-    clearInterval(this.intercalId)
+  componentWillUnMount(){
+    clearInterval(this.intervalId)
   }
 
   // 渲染到页面
   // 得到当前请求路径
   render(){
-    const path = this.props.location.pathname
-    const {currentTime} = this.state
+    const {currentTime, dayPictureUrl, weather, isFullScreen} = this.state
+    const {username, headerTitle} = this.props
 
 
     // 页面结构

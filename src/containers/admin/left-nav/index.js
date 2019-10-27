@@ -14,9 +14,11 @@ import './index.less'
 
 
 const {SubMenu,Item} = Menu
+
 @connect(state =>({headerTitle:state.headerTitle}),{setHeaderTitle})
 @withRouter
 class LeftNav extends Component{
+
   // 使用reduce()+递归生成多级菜单数组
   getMenuNodes_reduce = (menuList) =>{
     return menuList.reduce((pre,item) =>{
@@ -25,7 +27,7 @@ class LeftNav extends Component{
       // 向pre添加<item>
       if (!item.children) {
         // 如果当前请求的是item对应的路径,将当前title保存到state中
-        if (item.key === path && this.props.headerTitle === item.title) {
+          if (path.indexOf(item.key)===0 && this.props.headerTitle!==item.title) {
           this.props.setHeaderTitle(item.title)
         }
 
@@ -97,7 +99,11 @@ class LeftNav extends Component{
 
 render(){
   const menuNodes = this.getMenuNodes_reduce(menuList)
-  const selectedKey = this.props.location.pathname
+  let selectedKey = this.props.location.pathname
+  if (selectedKey.indexOf('/product') === 0) {
+    selectedKey = '/producct'
+  }
+  
   const openKey = this.openKey
   console.log('left-nav render()',selectedKey,openKey)
   return(
@@ -113,7 +119,7 @@ render(){
           selectedKeys={[selectedKey]}
           defaultOpenKeys={[openKey]}
         >
-      { menuNodes }
+    { menuNodes }
           </Menu>
       </div>
   )

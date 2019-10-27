@@ -36,8 +36,6 @@ class Login extends Component {
         console.log('发送ajax请求',{username,password});
         const {username,password} = values
         this.props.loginAsync(username,password)
-
-       
         }else{
         // 不写
       }

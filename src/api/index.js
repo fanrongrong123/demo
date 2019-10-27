@@ -44,5 +44,26 @@ export const reAddCategory = (categoryName) =>ajax.post('/manage/category/add',{
 
 // 更新分类
 export const reqUpdateCategory = ({categoryId,categoryName}) =>ajax({
-  url:''
+  url:'/manage/product/list',
+  params:{
+    pageNum,
+    pageSize
+  }
+})
+
+
+// 搜索获取商品分页列表
+
+export const reqSearchProducts = ({
+  pageNum, 
+  pageSize, 
+  searchType, // 搜索类型名称 
+  searchName, // 搜索的关键字
+}) => ajax({
+  url: '/manage/product/search',
+  params: {
+    pageNum,
+    pageSize,
+    [searchType]: searchName 
+  }
 })
