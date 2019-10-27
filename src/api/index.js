@@ -31,10 +31,18 @@ export const reqWeather = (city) =>{
         resolve({dayPictureUrl,weather})
       }else{
         message.error('获取天气失败!')
-        return new Promise(()=>{})
+        return new Promise( ()=>{})
       }
     })
   })
 }
 // 获取所有分类列表
 export const reqCategorys = () => ajax('/manage/category/list')
+
+// 添加分类
+export const reAddCategory = (categoryName) =>ajax.post('/manage/category/add',{categoryName})
+
+// 更新分类
+export const reqUpdateCategory = ({categoryId,categoryName}) =>ajax({
+  url:''
+})
