@@ -7,6 +7,8 @@ import storage from '../../utils/storage'
 
 const _user = storage.get(storage.KEYS.USER_KEY, {})
 const _token = storage.get(storage.KEYS.TOKEN_KEY, '')
+
+
 const initUser = { //初始值从local中读取
   user: _user,
   token: _token,
