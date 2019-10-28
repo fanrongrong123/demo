@@ -81,7 +81,7 @@ import './index.less'
 
   
   // 清除定时器
-  componentWillUnMount(){
+  componentWillUnmount(){
     clearInterval(this.intervalId)
   }
 
@@ -95,20 +95,22 @@ import './index.less'
     // 页面结构
   return (
     <div className="header">
-      <div className="header-top">
-        <span>欢迎, {this.props.username}</span>
-        <LinkButton onClick={this.logout}>退出</LinkButton>
-      </div>
-
-      <div className="header-bottom">
-        <div className="header-bottom-left">{path}</div>
-        <div className="header-bottom-right">
-          <span>{currentTime}</span>
-          <img src="http://api.map.baidu.com/images/weather/day/xiaoyu.png" alt="weather"/>
-          <span>小雨转多云</span>
+        <div className="header-top">
+          <Button size="small" onClick={this.handleFullScreen}>
+            <Icon type={isFullScreen ? 'fullscreen-exit' : 'fullscreen'} />
+          </Button> &nbsp;
+          <span>欢迎, {username}</span>
+          <LinkButton onClick={this.logout}>退出</LinkButton>
+        </div>
+        <div className="header-bottom">
+          <div className="header-bottom-left">{headerTitle}</div>
+          <div className="header-bottom-right">
+            <span>{currentTime}</span>
+            < img src={dayPictureUrl} alt="weather"/>
+            <span>{weather}</span>
+          </div>
         </div>
       </div>
-    </div>
   )
   }
 

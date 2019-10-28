@@ -27,8 +27,6 @@ const { Footer, Sider, Content } = Layout
 @WithCheckLogin
 class Admin extends Component {
 
- 
-
   render() {
     return (
       <Layout style={{height: '100%'}}>
