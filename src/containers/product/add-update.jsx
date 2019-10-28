@@ -20,3 +20,8 @@ import RichTextEditor from "./rich-text-editor"
 const {Item} = Form
 const {Option} = Select
 
+// Admin商品子路由组件
+@connect(
+  state =>({categorys:state.categorys}),
+  {getCategorysAsync}
+) 
