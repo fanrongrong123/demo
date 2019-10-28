@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import {Card,Button,Icon,Table,Modal,message} from 'antd'
 
 import {connect} from 'react-redux'
-import {reqAddCategory,reqUpdateCategory, reqCategorys} from '../../api'
 import LinkButton from '../../components/link-button'
 import AddUpdateForm from './add-update-from'
 import { 
@@ -16,11 +15,11 @@ import {
 
 
 @connect(
-  state =>({categorys:this.state.categorys}),
+  state =>({categorys:state.categorys}),
   {getCategorysAsync,addCategoryAsync,updateCategoryAsync}
 )
 
-class Category extends Comment {
+class Category extends Component {
   state = {
     loading:false,   //默认是否显示loading
     isShowAdd:false,    //默认是否添加对话框

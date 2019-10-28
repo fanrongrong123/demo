@@ -2,7 +2,6 @@
 用户登陆的一级路由组件
  */
 import React, {Component} from 'react'
-import {Redirect} from 'react-router-dom'
 import {Form,Input,Icon,Button} from "antd";
 import {connect} from 'react-redux'
 // import qs from 'qs'
@@ -57,12 +56,12 @@ class Login extends Component {
     }
   }
   render () {
-    const {hasLogin} = this.props
+    
+    console.log('Login render()',this.props.form)
+    const {getFieldDecorator} = this.props.form;
+
     // 判断登陆成功自动跳转界面
-    if (hasLogin) {
-      return<Redirect to="/"/>
-    }
-    const { getFieldDecorator } = this.props.form;
+  
     return (
       <div className='login'>
         <header className='login-header'>

@@ -6,6 +6,8 @@ import {Menu,Icon} from 'antd'
 import {Link} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
+// 用于切换中英文版本
+import {withTranslation,getI18n} from 'react-i18next'
 
 import menuList from '../../../config/menu-config'
 import logo from '../../../assets/images/logo.png'
@@ -17,6 +19,7 @@ const {SubMenu,Item} = Menu
 
 @connect(state =>({headerTitle:state.headerTitle}),{setHeaderTitle})
 @withRouter
+@withTranslation()  //向组件传递i18n对象
 class LeftNav extends Component{
 
   // 使用reduce()+递归生成多级菜单数组
@@ -95,6 +98,14 @@ class LeftNav extends Component{
       }
       })
   }
+// 绑定监听切换中英文版本
+  componentDidMount() {
+    setInterval(() => {
+      this.props.i18n.changeLanguage(this.props.i18n.language==='en' ? 'zh-CN' : 'en')
+    }, 2000);
+  }
+
+
 // 渲染到页面
 
 render(){
@@ -110,7 +121,7 @@ render(){
     <div className="left-nav">
         <div className="left-nav-header">
           <img src={logo} alt="logo"/>
-          <h1>硅谷后台</h1>
+          <h1>{this.props.t('title')}</h1>
         </div>
        
         <Menu
