@@ -3,8 +3,8 @@
 import {
   RECEIVE_CATEGORYS,
   ADD_CATEGORY,
-  UPATE_CATEGORY
-}from'../action-types.js'
+  UPDATE_CATEGORY
+}from'../action-types'
 
 const initCategorys = []
 export default function categorys(state = initCategorys,action) {
@@ -13,8 +13,8 @@ export default function categorys(state = initCategorys,action) {
       return action.data
       case ADD_CATEGORY:
         return [action.data,...state]
-      case UPATE_CATEGORY:
-        return this.state.map(iten =>{
+      case UPDATE_CATEGORY:
+        return state.map(item =>{
           if (item._id === action.data._id) {
             return action.data
           } else  {

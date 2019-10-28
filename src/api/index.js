@@ -40,10 +40,17 @@ export const reqWeather = (city) =>{
 export const reqCategorys = () => ajax('/manage/category/list')
 
 // 添加分类
-export const reAddCategory = (categoryName) =>ajax.post('/manage/category/add',{categoryName})
+export const reqAddCategory = (categoryName) =>ajax.post('/manage/category/add',{categoryName})
 
 // 更新分类
 export const reqUpdateCategory = ({categoryId,categoryName}) =>ajax({
+  url:'/manage/product/list',
+  method:'POST',
+  data:{categoryId,categoryName}
+})
+
+// 获取商品分页列表
+export const reqProducts = (pageNum,pageSize) => ajax({
   url:'/manage/product/list',
   params:{
     pageNum,

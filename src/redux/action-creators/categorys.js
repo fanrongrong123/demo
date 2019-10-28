@@ -1,6 +1,7 @@
 // 操作所有数据
 
 // 操作所有分类列表数据的action creator
+import Category from '../../containers/category'
 
 import {
   RECEIVE_CATEGORYS,
@@ -14,7 +15,7 @@ import {
   reqUpdateCategory
 } from '../../api'
 
-import Category from '../../containers/category'
+
 
 
 // 同步action creator
@@ -44,7 +45,7 @@ export const addCategoryAsync = (categoryName) =>{
     const result = await reqAddCategory(categoryName)
     if (result.status === 0) {
       const category = result.data
-      dispatch(addCategory(Category))
+      dispatch(addCategory(category))
     }
     return result.msg
   }
