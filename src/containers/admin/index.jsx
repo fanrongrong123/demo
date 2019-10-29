@@ -11,16 +11,7 @@ import WithCheckLogin from '../with-check-login'
 
 
 
-// import User from '../user'
-// import Role from '../role'
-// import Home from '../../components/home'
-// import Category from '../category'
-// import Product from '../product'
-// import ProductDetail from '../product/detail'
-// import ProductAddUpdate from '../product/add-update'
-// import Line from '../../components/charts/line'
-// import Bar from '../../components/charts/bar'
-// import Pie from '../../components/charts/pie'
+
 
 const { Footer, Sider, Content } = Layout
 

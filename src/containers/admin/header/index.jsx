@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import format from 'date-fns/format'
 import {Modal,Button,Icon} from 'antd'
 import screenfull from 'screenfull'
+import {withTranslation} from 'react-i18next'
 
 
 import {removeUserToken} from '../../../redux/action-creators/user'
@@ -12,6 +13,7 @@ import LinkButton from '../../../components/link-button'
 import {reqWeather} from '../../../api'
 
 import './index.less'
+import { withTranslation } from 'react-i18next'
 
 
 
@@ -58,6 +60,15 @@ import './index.less'
     }
   }
 
+  // 切换中英文版本
+  changeLanguage = () =>{
+    const language = this.state.language === 'en'?'zh-CN':'en'
+    this.props.i18n.changeLanguage(language)
+    this.setState({
+      language
+    })
+  }
+  
   componentDidMount(){
     // 启动定时器,每隔1秒更新显示时间
     this.intercalId = setInterval(() => {

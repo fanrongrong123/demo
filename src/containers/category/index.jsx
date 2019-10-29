@@ -1,4 +1,4 @@
-// 中间列表组件
+// admin分类管理子路由组件
 
 // 引入
 import React, { Component } from 'react'

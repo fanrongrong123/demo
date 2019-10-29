@@ -22,10 +22,25 @@ const {SubMenu,Item} = Menu
 @withTranslation()  //向组件传递i18n对象
 class LeftNav extends Component{
 
-  // 使用reduce()+递归生成多级菜单数组
-  getMenuNodes_reduce = (menuList) =>{
-    return menuList.reduce((pre,item) =>{
-      const path = this.props.location.pathname
+  hasAuth = (item) =>{
+    const {username,role:{menus}} = this.props.user
+    if (username === 'admin'|| item.isPublic || menus.indexOf(item.key)!== -1) {
+      return true
+    }else if (item.children) {
+      return item.children.some(cItem => menus.indexOf(cItem.key) !== -1)
+    }
+    return false
+  }
+
+    // 使用reduce和递归调用生成多级菜单项数组
+    getMenuNodes_reduce = (menuList) => {
+      return menuList.reduce((pre,item) =>{
+        const  path =this.props.location.pathname
+
+        if (this.hasAuth(item)) {
+          
+        }
+    
 
       // 向pre添加<item>
       if (!item.children) {
@@ -39,13 +54,13 @@ class LeftNav extends Component{
           <Item key={item.key}>
           <Link to={item.key} onClick={() => this.props.setHeaderTitle(item.title)}>
             <Icon type={item.icon} />
-            <span>{item.title}</span>
+            <span>{this.props.t(item.title)}</span>
           </Link>
         </Item>
         ))
       }else{
         // 向pre中添加submenu
-        if (item.children.some(item =>item.key === path)) {
+        if (item.children.some(item =>path.indexOf(item.key) === 0)) {
           this.openKey = item.key
         }
 
@@ -77,7 +92,7 @@ class LeftNav extends Component{
          <Item key={item.key}>
            <Link to={item.key}>
              <Icon type={item.icon} />
-             <span>{item.title}</span>
+             <span>{this.props.t('menus.home')}</span>
            </Link>
          </Item>
         )
@@ -98,12 +113,6 @@ class LeftNav extends Component{
       }
       })
   }
-// 绑定监听切换中英文版本
-  componentDidMount() {
-    setInterval(() => {
-      this.props.i18n.changeLanguage(this.props.i18n.language==='en' ? 'zh-CN' : 'en')
-    }, 2000);
-  }
 
 
 // 渲染到页面
@@ -111,7 +120,7 @@ class LeftNav extends Component{
 render(){
   const menuNodes = this.getMenuNodes_reduce(menuList)
   let selectedKey = this.props.location.pathname
-  if (selectedKey.indexOf('/product') === 0) {
+  if (selectedKey.indexOf('/product/') === 0) {
     selectedKey = '/producct'
   }
   
