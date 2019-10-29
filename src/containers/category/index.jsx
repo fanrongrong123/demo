@@ -14,60 +14,60 @@ import {
 } from '../../redux/action-creators/categorys'
 
 
-@connect(
-  state =>({categorys:state.categorys}),
-  {getCategorysAsync,addCategoryAsync,updateCategoryAsync}
+function Category (props) {
+
+  const [loading, setLoading] = useState(false)
+  const [isShowAdd, setShowAdd] = useState(false)
+  const [isShowUpdate, setShowUpdate] = useState(false)
+
+  const categoryRef = useRef({})
+  const formRef = useRef(null)
+
+const columnsRef = userRef (
+ 
+ [
+    {
+     title:'分类名称',
+     dataIndex:'name',
+    },
+    {
+      width:300,
+      title:'操作',
+          // 如果没有指定dataIndex, 接收数据对象参数, 如果指定了dataIndex, 接收对应值的参数
+          render: (category) =>
+           <LinkButton onClick={() =>
+             this.showUpdate(category)}>修改分类</LinkButton>,
+      }
+  ]
 )
 
-class Category extends Component {
-  state = {
-    loading:false,   //默认是否显示loading
-    isShowAdd:false,    //默认是否添加对话框
-    isShowUpdata:false,   //默认是否显示修改的对话框
-  }
+    useEffect(() => {
+    getCategorys()
+    }, [])
 
-
-
- columns = [
-  {
-   title:'分类名称',
-   dataIndex:'name',
-  },
-  {
-    width:300,
-    title:'操作',
-        // 如果没有指定dataIndex, 接收数据对象参数, 如果指定了dataIndex, 接收对应值的参数
-        render: (category) =>
-         <LinkButton onClick={() =>
-           this.showUpdate(category)}>修改分类</LinkButton>,
-    }
-]
 
 
 
   // 异步获取分类列表显示
-  getCategorys = async() =>{
-    // 显示loading
-    this.setState({
-      loading:true
-    })
+ async function getCategorys() {
+   // 显示loading
+    setLoading(true)
     const msg = await this.props.getCategorysAsync()
-
+  
     // 隐藏loading
-    this.setState({
-      loading:false
-    })
+   setLoading(false)
 
     if (msg) {
       message.error(msg)
     }
   }
-
-    // 添加分类
-    addCategory =() =>{
-      // 验证
-      this.form.validateFields(async(error,values) => {
-        if (!error) {
+  
+ 
+     // 添加分类
+    function addCategory() {
+      formRef.current.validateFields(async(error,values) =>{
+    // 验证
+      if (!error) {
         // 添加成功,得到数据
         const {categoryName} = values
         const msg = await this.props.addCategoryAsync(categoryName)
@@ -75,21 +75,18 @@ class Category extends Component {
           // 添加失败,显示错误提示
           message.error(msg)
         }else{
-          this.setState({
-            isShowAdd:false
-          })
+          setShowAdd(false)
           message.success('添加分类成功')
         }
        }
       })
-      
-    }
+      }
 
 
     // 更新分类
-    updataCategory = () =>{
+    function updateCategory() {
       // 验证
-      this.form.validateFields(async(error,values) =>{
+      formRef.current.validateFields(async(error,values) =>{
         if (!error) {
           // 得到输入数据
           const {categoryName} = values
@@ -112,47 +109,34 @@ class Category extends Component {
   
   // 隐藏添加界面
   
-  hideAdd = () => {
-    this.form.resetFields() // 回到初始值
-    this.setState({
-      isShowAdd: false
-    })
-  }
+function hideAdd() {
+  formRef.current.resetFields()  //回到初始值
+  setShowAdd(false)
+}
 
   
   // 显示更新界面
-  showUpdate = (category) => {
+  function showUpdate (category){
     // 保存分类
-    this.category = category
+   categoryRef.current = category
     // 显示
-    this.setState({
-      isShowUpdate: true
-    })
+   setShowUpdate(true)
   }
 
 
   // 隐藏更新界面
 
- hideUpdate = () => {
-  // 删除添加的属性
-  delete this.category
+ function hideUpdate () {
+  // 删除前面添加的属性
+  categoryRef.current = {}
   // 重置输入
-  this.form.resetFields()
+  formRef.current.resetFields()
   // 隐藏更新界面
-  this.setState({
-    isShowUpdate: false
-  })
+  setShowUpdate(false)
 }
 
-componentDidMount () {
-  this.getCategorys()
-}
-
-render() {
-
-  const {loading, isShowAdd, isShowUpdate} = this.state
-  const {categorys} = this.props
-  const category = this.category || {} 
+const {categorys} = props
+const category = categoryRef.current
 
   // 右上角界面
   const extra = (
@@ -194,6 +178,8 @@ render() {
  
     )
   }
-}
 
-export default Category
+  export default connect(
+    state => ({categorys: state.categorys}),
+    {getCategorysAsync, addCategoryAsync, updateCategoryAsync}
+  )(Category)
