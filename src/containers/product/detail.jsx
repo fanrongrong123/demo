@@ -10,7 +10,7 @@ import './detail.less'
 const Item = List.Item
 
 // 商品子路由组件
-export defalt class Detail extends Component{
+export default class Detail extends Component{
   state = {
     product:{},
     categoryName:''
