@@ -31,9 +31,9 @@ class Login extends Component {
     // 对表单字段进行统一验证
     this.props.form.validateFields((err,values)=>{
       if (!err) {
-        // 验证成功
-        console.log('发送ajax请求',{username,password});
         const {username,password} = values
+        // 验证成功
+        console.log('发送ajax请求',{username,password})
         this.props.loginAsync(username,password)
         }else{
         // 不写

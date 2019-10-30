@@ -13,11 +13,11 @@ export const reqLogin = ({username,password}) => ajax({
  data:{username,password}
 })
 
-// 获取用户列表
-export const reqUsers =()=> ajax({
-  url:'/manage/user/list',
-  method:'GET',
-})
+// // 获取用户列表
+// export const reqUsers =()=> ajax({
+//   url:'/manage/user/list',
+//   method:'GET',
+// })
 
 
 // 封装获取指定城市的天气信息
@@ -119,4 +119,4 @@ export const reqUsers = () => ajax('/manage/user/list')
 // 删除指定用户
 export const reqDeleteUser = (userId) => ajax.post('/manage/user/delete', {userId})
 // 添加/更新用户
-export const reqAddOrUpdateUser = (user) => ajax.post('/manage/user/'+(user._id ? 'update' : 'add'), user
+export const reqAddOrUpdateUser = (user) => ajax.post('/manage/user/'+(user._id ? 'update' : 'add'),user)

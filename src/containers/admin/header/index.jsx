@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 import format from 'date-fns/format'
 import {Modal,Button,Icon} from 'antd'
 import screenfull from 'screenfull'
-import {withTranslation} from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 
 import {removeUserToken} from '../../../redux/action-creators/user'
@@ -13,7 +13,7 @@ import LinkButton from '../../../components/link-button'
 import {reqWeather} from '../../../api'
 
 import './index.less'
-import { withTranslation } from 'react-i18next'
+
 
 
 

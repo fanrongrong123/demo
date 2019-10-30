@@ -61,10 +61,10 @@ instance .interceptors.response.use(
       NProgress.done()
 
       //3. 统一处理请求异常,外部调用不再处理请求异常
-      const{status,data:{msg} = {}} = console.error.response
+      const{status,data:{msg} = {}} =error.response
       // 如果staus为401,token有问题
       if (status === 401) {
-        if (history.location.pathname !=='./login') {
+        if (history.location.pathname !=='/login') {
           // 显示错误的提示
        message.error(msg)
       //  删除用户信息,自动跳转到登陆界面
